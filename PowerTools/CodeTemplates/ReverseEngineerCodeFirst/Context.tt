@@ -1,0 +1,67 @@
+﻿<#@ template hostspecific="true" language="C#" #>
+<#@ include file="EF.Utility.CS.ttinclude" #><#@
+ output extension=".cs" #><#
+
+    var efHost = (EfTextTemplateHost)Host;
+	efHost.Namespace = "Decision.Context";
+	efHost.MappingNamespace = "Decision.Context.Mapping";
+    var code = new CodeGenerationTools(this);
+#>
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using Decision.Entity;
+using <#= code.EscapeNamespace(efHost.MappingNamespace) #>;
+
+namespace <#= code.EscapeNamespace(efHost.Namespace) #>
+{
+    public partial class <#= "DecisionDbContext" #> : DbContext
+    {
+        static <#= "DecisionDbContext" #>()
+        {
+            Database.SetInitializer<<#= "DecisionDbContext" #>>(null);
+        }
+
+        public <#= "DecisionDbContext" #>()
+            : base("Name=<#= "DecisionDbContext" #>")
+        {
+			Configuration.LazyLoadingEnabled = false;
+        }
+
+<#
+    foreach (var set in efHost.EntityContainer.BaseEntitySets.OfType<EntitySet>())
+    {
+#>
+        public DbSet<<#= ToPascal(set.ElementType.Name) #>> <#= ToPascal(set.Name) #> { get; set; }
+<#
+    }
+#>
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("Oracle_Schema");//用户名必须大写
+			
+<#
+    foreach (var set in efHost.EntityContainer.BaseEntitySets.OfType<EntitySet>())
+    {
+#>
+            modelBuilder.Configurations.Add(new <#= ToPascal(set.ElementType.Name) #>Map());
+<#
+    }
+#>
+        }
+    }
+}
+
+<#+
+ public string ToPascal(string raw)
+ {
+    var value = new StringBuilder("");
+    var names = raw.ToLower().Split("_".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+    foreach (var name in names)
+    {
+        value.Append(name[0].ToString().ToUpper());
+        value.Append(name.Skip(1).ToArray());
+    }
+    return value.ToString();
+ }
+#>

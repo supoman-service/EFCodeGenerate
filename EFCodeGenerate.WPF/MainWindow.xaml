@@ -1,0 +1,47 @@
+﻿<Controls:MetroWindow x:Class="EFCodeGenerate.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:EFCodeGenerate.WPF"
+        mc:Ignorable="d"
+        ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
+        BorderThickness="1"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        NonActiveGlowBrush="#CDFF0000"
+        Title="EF代码生成器——Oracle" MinHeight="350" MinWidth="600" Height="400" Width="650"
+        Closing="MetroWindow_Closing">
+    <Border Padding="20">
+        <Grid ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="textBlock" Grid.Row="0" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="Data Source" />
+            <TextBox x:Name="txtDataSource" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Text="192.168.2.197:1521" />
+            <TextBlock x:Name="textBlock1" Grid.Row="0" Grid.Column="2" TextAlignment="Right" VerticalAlignment="Center" Text="Service Name" />
+            <TextBox x:Name="txtServiceName" Grid.Row="0" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Text="JC_WD1" />
+            <TextBlock x:Name="textBlock2" Grid.Row="1" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="User Name" />
+            <TextBox x:Name="txtUserName" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Text="jc_cc_001" />
+            <TextBlock x:Name="textBlock3" Grid.Row="1" Grid.Column="2" TextAlignment="Right" VerticalAlignment="Center" Text="Password" />
+            <TextBlock x:Name="txtPassword" Grid.Row="1" Grid.Column="3" TextAlignment="Left" VerticalAlignment="Center" Height="30" Text="Jinchang001"/>
+            <TextBlock x:Name="textBlock4" Grid.Row="2" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="表名" />
+            <TextBox x:Name="txtTableNames" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Controls:TextBoxHelper.Watermark="为空时表示生成全部表，表名之间以空格分隔" Text="Active_Listings_Report"/>
+            <TextBlock x:Name="textBlock5" Grid.Row="3" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="保存路径" />
+            <TextBox x:Name="txtSavePath" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" />
+            <Button x:Name="btnRun" Content="开始生成" Grid.Row="4" Grid.ColumnSpan="4" FontSize="15" Margin="20 10" Click="btnRun_Click" />
+        </Grid>
+    </Border>
+</Controls:MetroWindow>
