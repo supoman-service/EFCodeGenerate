@@ -6,6 +6,7 @@ Entity Framework Mapping->Model 映射生成工具
 适用C#,VB.NET，默认C#，如果需要生成VB.NET，需要自行调整，在类**OptimizeContextHandler**下*OptimizeContext*函数内。
 我这里因为用的是Oracle，只用了Oracle的C#生。
 
+**如果出现Debug生成异常的，设置项目属性->生成 里选择 目标平台 首选32位勾上即可**
 ## 生成结构
 #### 脚本
 ```sql
