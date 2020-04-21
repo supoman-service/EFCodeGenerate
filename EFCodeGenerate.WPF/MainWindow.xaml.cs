@@ -48,13 +48,6 @@ namespace EFCodeGenerate.WPF
                     MessageBox.Show("主要参数不能为空.");
                     return;
                 }
-
-                var strCon = string.Format("DATA SOURCE={0}/{1};PASSWORD={3};PERSIST SECURITY INFO=True;POOLING=False;USER ID={2}",
-                    txtDataSource.Text.Trim(),
-                    txtServiceName.Text.Trim(),
-                    txtUserName.Text.Trim().ToUpper(),
-                    txtPassword.Text.Trim());
-
                 List<string> tableNames = null;
                 if (!string.IsNullOrWhiteSpace(txtTableNames.Text))
                 {
@@ -66,14 +59,30 @@ namespace EFCodeGenerate.WPF
                 {
                     savePath = txtSavePath.Text.Trim();
                 }
+                ICodeFirstHandler handler = null;
+                var strCon = "";
+                switch (dbType.Text)
+                {
+                    case "Oracle":
+                        strCon = $"DATA SOURCE={txtDataSource.Text.Trim()}/{txtServiceName.Text.Trim()};PASSWORD={txtPassword.Text.Trim()};PERSIST SECURITY INFO=True;POOLING=False;USER ID={txtUserName.Text.Trim().ToUpper()}";
+                         handler = new OracleReverseEngineerCodeFirstHandler();
+                        break;
+                    case "SQLServer":
+                        strCon = $"Data Source={txtDataSource.Text.Trim()};initial catalog={txtServiceName.Text.Trim()};persist security info=True;user id={txtUserName.Text.Trim()};Password={txtPassword.Text.Trim()}; MultipleActiveResultSets=True";
+                          handler = new MSServerReverseEngineerCodeFirstHandler();
+                        break;
+                    default:
+                        this.ShowMessageAsync("发生异常", "数据库类型选择错误");
+                        break;
+                }
 
                 btnRun.IsEnabled = false;
                 var result = true;
                 await Task.Factory.StartNew(() =>
                 {
+
                     try
                     {
-                        var handler = new OracleReverseEngineerCodeFirstHandler();
                         handler.ReverseEngineerCodeFirst(strCon, tableNames, savePath);
                     }
                     catch (Exception ex)
@@ -83,15 +92,41 @@ namespace EFCodeGenerate.WPF
                     }
                 });
 
+                //try
+                //{
+                //    ICodeFirstHandler handler = null;
+                //    var strCon = "";
+                //    switch (dbType.Text)
+                //    {
+                //        case "Oracle":
+                //            strCon = $"DATA SOURCE={txtDataSource.Text.Trim()}/{txtServiceName.Text.Trim()};PASSWORD={txtPassword.Text.Trim()};PERSIST SECURITY INFO=True;POOLING=False;USER ID={txtUserName.Text.Trim().ToUpper()}";
+                //            handler = new OracleReverseEngineerCodeFirstHandler();
+                //            break;
+                //        case "SQLServer":
+                //            strCon = $"Data Source={txtDataSource.Text.Trim()};initial catalog={txtServiceName.Text.Trim()};persist security info=True;user id={txtUserName.Text.Trim()};Password={txtPassword.Text.Trim()}; MultipleActiveResultSets=True";
+                //            handler = new MSServerReverseEngineerCodeFirstHandler();
+                //            break;
+                //        default:
+                //            this.ShowMessageAsync("发生异常", "数据库类型选择错误");
+                //            break;
+
+                //    }
+                //    handler.ReverseEngineerCodeFirst(strCon, tableNames, savePath);
+                //}
+                //catch (Exception ex)
+                //{
+                //    result = false;
+                //    this.Dispatcher.Invoke(async () => { await this.ShowMessageAsync("发生异常", ex.Message); });
+                //}
                 if (result)
                 {
-                    await this.ShowMessageAsync("系统提示", "生成成功");
+                     this.ShowMessageAsync("系统提示", "生成成功");
                 }
                 btnRun.IsEnabled = true;
             }
             catch (Exception ex)
             {
-                await this.ShowMessageAsync("发生异常", ex.Message);
+                 this.ShowMessageAsync("发生异常", ex.Message);
             }
         }
 

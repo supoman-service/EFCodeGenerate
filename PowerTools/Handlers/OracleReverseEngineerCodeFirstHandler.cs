@@ -15,7 +15,7 @@ namespace Microsoft.DbContextPackage.Handlers
     using Microsoft.DbContextPackage.Resources;
     using Microsoft.DbContextPackage.Utilities;
 
-    public class OracleReverseEngineerCodeFirstHandler
+    public class OracleReverseEngineerCodeFirstHandler: ICodeFirstHandler
     {
         private static readonly IEnumerable<EntityStoreSchemaFilterEntry> _storeMetadataFilters = new[]
             {
@@ -28,8 +28,6 @@ namespace Microsoft.DbContextPackage.Handlers
         public void ReverseEngineerCodeFirst(string strCon, List<string> tableNames = null, string savePath = null)
         {
             // Load store schema
-            strCon =
-                "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.2.197)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=JC_WD1)));User ID=jc_cc_001;Password=Jinchang001;";
             var storeGenerator = new EntityStoreSchemaGenerator("Oracle.ManagedDataAccess.Client", strCon, "dbo");
             storeGenerator.GenerateForeignKeyProperties = true;
             var errors = storeGenerator.GenerateStoreMetadata(_storeMetadataFilters).Where(e => e.Severity == EdmSchemaErrorSeverity.Error);

@@ -29,19 +29,61 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="textBlock" Grid.Row="0" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="Data Source" />
-            <TextBox x:Name="txtDataSource" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Text="192.168.2.197:1521" />
-            <TextBlock x:Name="textBlock1" Grid.Row="0" Grid.Column="2" TextAlignment="Right" VerticalAlignment="Center" Text="Service Name" />
-            <TextBox x:Name="txtServiceName" Grid.Row="0" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Text="JC_WD1" />
-            <TextBlock x:Name="textBlock2" Grid.Row="1" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="User Name" />
-            <TextBox x:Name="txtUserName" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Text="jc_cc_001" />
-            <TextBlock x:Name="textBlock3" Grid.Row="1" Grid.Column="2" TextAlignment="Right" VerticalAlignment="Center" Text="Password" />
-            <TextBlock x:Name="txtPassword" Grid.Row="1" Grid.Column="3" TextAlignment="Left" VerticalAlignment="Center" Height="30" Text="Jinchang001"/>
+            <TextBlock x:Name="textBlock" Grid.Row="1" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="Data Source" Margin="0,4,0,46" />
+            <TextBox x:Name="txtDataSource" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Text="192.168.2.215:1521" Margin="0,63,0,39" Grid.RowSpan="2" />
+            <TextBlock x:Name="textBlock1" Grid.Row="1" Grid.Column="2" TextAlignment="Right" VerticalAlignment="Center" Text="Service Name" Margin="0,4,0,46" />
+            <TextBox x:Name="txtServiceName" Grid.Row="0" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Text="orcl" Margin="0,63,0,39" Grid.RowSpan="2" />
+            <TextBlock x:Name="textBlock2" Grid.Row="1" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="User Name" Margin="0,42,0,8" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.184"/>
+                        <TranslateTransform Y="0.846"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBox x:Name="txtUserName" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Text="jc_admin" Margin="0,35,0,1" RenderTransformOrigin="0.5,0.5" >
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.184"/>
+                        <TranslateTransform X="0.001" Y="0.377"/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+            </TextBox>
+            <TextBlock x:Name="textBlock3" Grid.Row="1" Grid.Column="2" TextAlignment="Right" VerticalAlignment="Center" Text="Password" Margin="0,42,0,8" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.184"/>
+                        <TranslateTransform X="-0.002" Y="-0.116"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
             <TextBlock x:Name="textBlock4" Grid.Row="2" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="表名" />
             <TextBox x:Name="txtTableNames" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Controls:TextBoxHelper.Watermark="为空时表示生成全部表，表名之间以空格分隔" Text="Active_Listings_Report"/>
             <TextBlock x:Name="textBlock5" Grid.Row="3" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="保存路径" />
             <TextBox x:Name="txtSavePath" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" />
             <Button x:Name="btnRun" Content="开始生成" Grid.Row="4" Grid.ColumnSpan="4" FontSize="15" Margin="20 10" Click="btnRun_Click" />
+            <ComboBox x:Name="dbType" HorizontalAlignment="Left" Margin="72,18,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" >
+                <ComboBoxItem Content="Oracle" Tag="1" IsSelected="True"></ComboBoxItem>
+                <ComboBoxItem Content="SQLServer" Tag="2"></ComboBoxItem>
+
+            </ComboBox>
+            <TextBlock x:Name="textBlock_Copy" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center" Text="数据库类型" Margin="-10,20,10,30" />
+            <TextBox x:Name="txtPassword" Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="30" Text="Jinchang001" Margin="1,36,-2,0" RenderTransformOrigin="0.5,0.5" >
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.184"/>
+                        <TranslateTransform X="0.001" Y="0.377"/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+            </TextBox>
         </Grid>
     </Border>
 </Controls:MetroWindow>
